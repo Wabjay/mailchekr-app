@@ -1,0 +1,27 @@
+
+
+@font-face {
+    font-family: "UntitledSans-Light";
+    src: url("./assets/font/UntitledSans-Light.otf");
+  };
+  
+  @font-face {
+      font-family: "UntitledSans";
+      src: url("./assets/font/UntitledSans-Regular.otf");
+    };
+    @font-face {
+      font-family: "UntitledSans-Medium";
+      src: url("./assets/font/UntitledSans-Medium.otf");
+    };
+    @font-face {
+      font-family: "UntitledSans-SemiBold";
+      src: url("./assets/font/UntitledSans-SemiBold.otf");
+    };
+    @font-face {
+      font-family: "UntitledSans-Bold";
+      src: url("./assets/font/UntitledSans-Bold.otf");
+    };
+    @font-face {
+        font-family: "Inter";
+        src: url("./assets/font/Inter-Regular.ttf");
+      };

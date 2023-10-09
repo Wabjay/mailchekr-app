@@ -1,0 +1,1 @@
+export const urls = 'https://mail-checkr-api.onrender.com/api/'
