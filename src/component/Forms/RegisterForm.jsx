@@ -33,8 +33,6 @@ const RegisterForm = ({email}) => {
           );
           console.log(JSON.stringify(response?.data));
           console.log(JSON.stringify(response));
-            // email(mail);
-            // setSuccess(success);
         setLoading(false)
         navigate(`/verify/${email}`)
         console.log(`/verify/${email}`)
