@@ -5,7 +5,7 @@ import axios from "../../helper/api/axios";
 
 const UpdateProfileForm = () => {
 
-  const {user} = useContext(UserContext)
+  const user = useContext(UserContext);
   const navigate = useNavigate();
 
     const [loading,setLoading]= useState(false)
@@ -72,8 +72,10 @@ const UpdateProfileForm = () => {
             .then((res) => {
               localStorage.clear()
               console.log(res)
-              navigate(`/auth`)
+              user.setLogin(false)
+              // navigate(`/auth`)
               setLoading(false);
+
             });
           setLoading(false);
         } catch (err) {

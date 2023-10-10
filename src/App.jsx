@@ -16,6 +16,7 @@ import { TailSpin } from "react-loader-spinner";
 
 function App() {
   const [loading, setLoading] = useState(false);
+  const [login, setLogin]= useState(false)
   const [user, setUser] = useState({});
   const [token, setToken] = useState("");
 
@@ -35,6 +36,7 @@ function App() {
           console.log(response.data.mesage);
           setUser(response.data.mesage);
           setLoading(false);
+          setLogin(true)
         });
     } catch (err) {
       console.log(err);
@@ -52,11 +54,11 @@ function App() {
       setLoading(false);
     }
     setLoading(false);
-  }, [token]);
+  }, [token, login]);
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, token, setToken, loading, setLoading }}
+      value={{ user, setUser, token, setToken, loading, setLoading, login, setLogin }}
     >
       <TableContext.Provider value={{ user, setUser, token, setToken }}>
         <React.Fragment>
@@ -85,7 +87,7 @@ function App() {
                 <Route path="*" element={<Home />} />
               </Routes>
             </BrowserRouter>
-          ) : (
+          ) : (!login && (
             <BrowserRouter>
               <Routes>
                 <Route exact path="/" element={<Auth />} />
@@ -93,8 +95,9 @@ function App() {
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/auth" element={<Auth />} />
                 <Route exact path="/verify/:id" element={<Verify />} />
+                <Route exact path="*" element={<Auth />} />
               </Routes>
-            </BrowserRouter>
+            </BrowserRouter>)
           )}
         </React.Fragment>
       </TableContext.Provider>
