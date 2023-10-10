@@ -52,7 +52,7 @@ export default {
         'red-300': '#FED86E',
         'red-200': '#FFE6A2',
         'red-100': '#FFF0C7',
-        'red-50': '#FFF6DE',
+        'red-50': '#FFF0ED',
         'red-10': '#FFFCF4',
         // Malachite
         'malachite-900': '#291E00',

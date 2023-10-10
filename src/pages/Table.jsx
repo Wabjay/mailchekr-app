@@ -93,7 +93,7 @@ const Table = () => {
       render: (_, id) => (
         <span
           className={`${
-            id.success === "Valid" ? "text-malachite-700" : "text-red-600"
+            id.success === "Valid" ? "text-malachite-700" : "text-red-600" 
           }`}
         >
           Invalid

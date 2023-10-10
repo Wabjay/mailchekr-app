@@ -51,21 +51,18 @@ function App() {
       //     setErrMsg('Login Failed');
       // }
       // errRef.current.focus();
+      setUser(localStorage.getItem('user'))
       setLoading(false)
   }
   setLoading(false)
 
-  },[token])
+  },[])
 
   
   return (
     <UserContext.Provider value={{user, setUser, token, setToken, loading, setLoading}}>
     <TableContext.Provider value={{user, setUser, token, setToken}}>
     <React.Fragment>
-    {/* {(token && LoggedIn) ? */}
-    {/* {console.log(token)}
-    {console.log(user)} */}
-    
     {loading ?  
     <div className="w-full h-full absolute top-0 left-0 flex justify-center items-center">
       <TailSpin
