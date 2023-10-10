@@ -1,5 +1,7 @@
 .sideBar{
+    box-sizing: border-box;
     width: 256px;
+    max-width: 256px;
     position: fixed;
     top: 57px;
     left: 0;

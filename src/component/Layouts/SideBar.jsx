@@ -14,7 +14,7 @@ const SideBar = () => {
       {/* <p className={style.logo}> MailChekr </p> */}
       <img src={Logo} className="w-[133px] h-[33px] ml-[3px]"/>
       <div className={style.links}>
-        <a className={`stroke-grey-600 hover:stroke-green-600  ${location === '/' && 'stroke-green-600 text-green-600 bg-white'}`} href="/">
+        <a className={`stroke-grey-600 hover:stroke-green-600 box-border ${location === '/' && 'stroke-green-600 text-green-600 bg-white'}`} href="/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -31,7 +31,7 @@ const SideBar = () => {
           </svg>
           <span className={`${location === '/' && 'text-green-600'}`}>Dashboard</span>
         </a>
-        <a href="/emails" className={`fill-grey-600 hover:fill-green-600 ${location === '/emails' && 'bg-white'}`}>
+        <a href="/emails" className={`fill-grey-600 hover:fill-green-600 box-border ${location === '/emails' && 'bg-white'}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -48,7 +48,7 @@ const SideBar = () => {
           </svg>
           <span className={`${location === '/emails' && 'text-green-600'}`}>All Emails</span>
         </a>
-        <a href="/api" className={`fill-grey-600 hover:fill-green-600 ${location === '/api' && 'bg-white'}`}>
+        <a href="/api" className={`fill-grey-600 hover:fill-green-600 box-border ${location === '/api' && 'bg-white'}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -67,7 +67,7 @@ const SideBar = () => {
           </svg>
           <span className={`${location === '/api' && 'text-green-600'}`}>API Keys</span>
         </a>
-        <a href="/setting" className={`stroke-grey-600 hover:stroke-green-600 ${location === '/setting' && 'bg-white'}`}>
+        <a href="/setting" className={`stroke-grey-600 hover:stroke-green-600 box-border ${location === '/setting' && 'bg-white'}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
