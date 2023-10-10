@@ -72,7 +72,7 @@ const UpdateProfileForm = () => {
             .then((res) => {
               localStorage.clear()
               console.log(res)
-              navigate(`/`)
+              navigate(`/auth`)
               setLoading(false);
             });
           setLoading(false);
