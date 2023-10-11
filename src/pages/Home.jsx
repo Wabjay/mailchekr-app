@@ -62,6 +62,7 @@ const columns = [
     title: 'Table Name',
     dataIndex: 'entryName',
     width: 150,
+    render:  (entryName) =><p className="capitalize">{entryName}</p>
   },
   {
     key: 'emails',

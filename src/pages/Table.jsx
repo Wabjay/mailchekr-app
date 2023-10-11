@@ -21,10 +21,10 @@ const Tables = () => {
   const [id, setId] = useState("");
   const location = useLocation().pathname;
 
-  useEffect(() => {
-    const url = location.split("/");
-    setId(url.slice(-1)[0]);
-  }, []);
+  // useEffect(() => {
+  //   const url = location.split("/");
+  //   setId(url.slice(-1)[0]);
+  // }, []);
 
   const exportEmail = (resp) => {
     resp ? setOpenModal(resp) : setOpenModal(resp); // resp = true || false
@@ -133,11 +133,19 @@ const Tables = () => {
     },
   ];
 
-  useEffect(() => {
+  useEffect( () => {
+    const url = location.split("/");
+    setId(url.slice(-1)[0]);
+    const tableId = (url.slice(-1)[0])
     setLoading(true);
-    try {
+    loadTable(tableId)
+  }, []);
+
+
+  const loadTable = (tableId)=>{
+     try {
       axios
-        .get(`validatedEntries/${id}`, {
+        .get(`validatedEntries/${tableId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -155,7 +163,9 @@ const Tables = () => {
       console.log(err); 
       setLoading(false);
     }
-  }, [id]);
+  }
+   
+ 
 
   return (
     <Layout>
