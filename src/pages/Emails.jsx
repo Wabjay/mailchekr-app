@@ -27,25 +27,21 @@ const Emails = () => {
                 Authorization : `Bearer ${localStorage.getItem('token')}`
                },
           }
-          
       )
       .then(res => {
-        console.log(res.data.emails.map(email => email))
-        res.data.emails.map(email => setEmail(email.validations))
-          // setEmail(res.data.emails)
+        console.log(res.data.data)
+        res.data.data.map(email => setEmail(email.validations.map(mail => [...emails, mail]) ))
+        const data = res.data.data.map(email => email.validations)
+          data.map(email => email.map(mail => emails.push(mail)))
+        console.log(emails)
+        setEmail(emails)
       }
-      )
-      
-      // console.log(localStorage.getItem('token'))
-     
-      // const users = JSON.stringify(response.mesage);    
+      ) 
     setLoading(false)
-      // setUser(users);
-      
   } catch (err) {
     console.log(err)
   }
-  },[])
+  },[emails])
 
   const columns = [
     {
@@ -88,7 +84,7 @@ const Emails = () => {
   
   return (
     <Layout>
-       <Heading text="All Emails">
+       <Heading text={`All Emails`}>
           <button
             onClick={exportEmail}
             className="bg-yellow-400 rounded-[8px] py-3 px-4 text-grey-900 font-medium text-sm leading-[20px]"
@@ -97,7 +93,9 @@ Export
           </button>
         </Heading>
         <Main>
-         <TableList  columns={columns} dataSource={emails}/>
+         <TableList  columns={columns} dataSource={emails}>
+          {console.log(emails)}
+          </TableList>
         </Main>
 
         <ExportEmailModal open={openModal} openFunction={exportEmail} />
