@@ -10,6 +10,8 @@ import { presidents } from "../component/Tables/president";
 import { useNavigate } from "react-router-dom";
 import View from "../assets/images/view.svg"
 import axios from "../helper/api/axios";
+import { Sorter } from "../component/sorter";
+// import Table from "../component/Tables/AntTable";
 
 const Home = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -60,9 +62,6 @@ const columns = [
     title: 'Table Name',
     dataIndex: 'entryName',
     width: 150,
-    sorter: {
-      compare: (a, b) => a.table - b.table,
-    },
   },
   {
     key: 'emails',
@@ -70,8 +69,8 @@ const columns = [
     dataIndex: 'numberOfEmailsValidated',
         width: 150,
         sorter: {
-          compare: (a, b) => a.number - b.number,
-          // multiple: 3,
+          compare: Sorter.DEFAULT,
+          multiple: 3
         },
   },
   {
@@ -80,8 +79,8 @@ const columns = [
     dataIndex: 'totalNumberOfSuccessfulValidations',
     width: 215,
     sorter: {
-      compare: (a, b) => a.success - b.success,
-      // multiple: 3,
+      compare: Sorter.DEFAULT,
+      multiple: 2
     },
   },
   {
@@ -90,8 +89,8 @@ const columns = [
     dataIndex: 'totalNumberOffailedValidations',
     width: 215,
     sorter: {
-      compare: (a, b) => a.fail - b.fail,
-      // multiple: 3,
+      compare: Sorter.DEFAULT,
+      multiple: 2
     },
   },
   {
@@ -129,6 +128,7 @@ let navigate = useNavigate();
         <Main>
          {/* <TableUncontrolled /> */}
          <TableList  columns={columns} dataSource={emails}/>
+         {/* <Table columns={columns} dataSource={emails}/> */}
 
         </Main>
         <ValidateEmailModal open={openModal} openFunction={validateEmail} />

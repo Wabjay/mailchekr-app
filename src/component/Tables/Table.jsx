@@ -3,7 +3,9 @@ import { useContext, useState } from "react"
 import ValidateEmailModal from "../Modals/ValidateEmailModal"
 import { UserContext } from "../../context/UserContext"
 
-const TableList = ({columns, dataSource, selection, width}) => {
+const TableList = (props) => {
+
+// const { columns, dataSource, selection, width, ...otherTableProps } = props;
 
 // const [loading, setLoading] = useState(false)
 const [page, setPage] = useState(1)
@@ -23,6 +25,31 @@ const onSelectChange = (newSelectedRowKeys) => {
   setSelectedRowKeys(newSelectedRowKeys);
 };
 
+
+
+const { columns, dataSource, selection, ...otherTableProps } = props;
+
+const sortableColumns = columns.map((column) => {
+  const { sorter, dataIndex, ...otherColumnProps } = column;
+
+  if (sorter) {
+    const { compare, ...otherSorterProps } = sorter;
+
+    return {
+      ...otherColumnProps,
+      dataIndex,
+      sorter: {
+        compare: (rowA, rowB) => compare(rowA[dataIndex], rowB[dataIndex]),
+        ...otherSorterProps
+      }
+    };
+  }
+
+  return { ...otherColumnProps, dataIndex };
+});
+
+
+
   return (
     <div>
       {!loading && dataSource < 1 ?
@@ -37,7 +64,8 @@ const onSelectChange = (newSelectedRowKeys) => {
       </div> :
         <Table 
         loading={loading}
-        columns={columns}
+        columns={sortableColumns}
+        {...otherTableProps}
         dataSource={dataSource}
         // sortDirections=[ascend, descend]
         showSorterTooltip={false}

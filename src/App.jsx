@@ -8,7 +8,7 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Verify from "./pages/auth/Verify";
 import Auth from "./pages/auth/Auth";
-import Table from "./pages/Table";
+import Tables from "./pages/Table";
 import React, { useEffect, useState } from "react";
 import { TableContext, UserContext } from "./context/UserContext";
 import axios from "./helper/api/axios";
@@ -80,7 +80,7 @@ function App() {
               <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/emails" element={<Emails />} />
-                <Route exact path="/table/:id" element={<Table />} />
+                <Route exact path="/table/:id" element={<Tables />} />
                 <Route exact path="/api" element={<Api />} />
                 <Route exact path="/setting" element={<Settings />} />
                 {/* <Route exact path="/project/:id" element={<Project />} /> */}

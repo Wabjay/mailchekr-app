@@ -8,8 +8,11 @@ import TableList from "../component/Tables/Table";
 import { useLocation } from "react-router-dom";
 import axios from "../helper/api/axios";
 import { UserContext } from "../context/UserContext";
+import { Sorter } from "../component/sorter";
+import Table from "../component/Tables/AntTable";
 
-const Table = () => {
+
+const Tables = () => {
   const [openModal, setOpenModal] = useState(false);
   const [emails, setEmails] = useState([]);
   const [entryName, setEntryName] = useState("");
@@ -34,8 +37,9 @@ const Table = () => {
       dataIndex: "emailAddress",
       width: 170,
       sorter: {
-        compare: (a, b) => a.emailAddress - b.emailAddress,
-      },
+        compare: Sorter.DEFAULT,
+        multiple: 2
+      }
     },
     {
       key: "2",
@@ -43,7 +47,8 @@ const Table = () => {
       dataIndex: "emailType",
       width: 170,
       sorter: {
-        compare: (a, b) => a.type - b.type,
+        compare: Sorter.DEFAULT,
+        multiple: 2
       },
     },
     {
@@ -52,7 +57,8 @@ const Table = () => {
       dataIndex: "emailFormatStatus",
       width: 190,
       sorter: {
-        compare: (a, b) => a.format - b.format,
+        compare: Sorter.DEFAULT,
+        multiple: 2
       },
       render: (_, id) => (
         <span
@@ -70,7 +76,8 @@ const Table = () => {
       dataIndex: "serverStatus",
       width: 200,
       sorter: {
-        compare: (a, b) => a.server - b.server,
+        compare: Sorter.DEFAULT,
+        multiple: 2
       },
       render: (_, id) => (
         <span
@@ -88,7 +95,8 @@ const Table = () => {
       dataIndex: "emailStatus",
       width: 190,
       sorter: {
-        compare: (a, b) => a.success - b.success,
+        compare: Sorter.DEFAULT,
+        multiple: 2
       },
       render: (_, id) => (
         <span
@@ -106,7 +114,8 @@ const Table = () => {
       dataIndex: "validationStatus",
       width: 200,
       sorter: {
-        compare: (a, b) => a.success - b.success,
+        compare: Sorter.DEFAULT,
+        multiple: 2
       },
       render: (_, id) => ( 
          id.validationStatus === "not_successful" ?
@@ -162,6 +171,7 @@ const Table = () => {
         
           <div className="tables">
             <TableList columns={columns} dataSource={emails} selection={true} />
+            {/* <Table columns={columns} dataSource={emails} selection={true} /> */}
           </div>
         
       </Main>
@@ -171,4 +181,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default Tables;
