@@ -15,7 +15,7 @@ const Layout = (props) => {
     console.log("Clicked")
   }
   return (
-<div className="relative h-[100vh]">
+<div className="">
   {/* Mobile Navbar */}
   {isTabletOrMobile && <div className="flex gap-6 p-4 z-20 fixed top-0 left-0 bg-white w-full border-b-[0.5px] border-grey-100 ">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" onClick={openSidebar}>
@@ -28,17 +28,11 @@ const Layout = (props) => {
     </div>}
   {/* SideBar come to refactooor logic */}
   { open &&
-     <SideBar />
+     <SideBar/>
   }
    { isDesktop &&
-     <SideBar />
+     <SideBar/>
   }
-  {/* SideBar come to refactooor logic */}
-
- 
-  <div className="mt-[56px] py-5 px-4 md:px-6 lg:py-[42px] lg:mt-0 lg:ml-[256px] xl:px-8 text-UntitledSans">
-    {props.children}
-  </div>
     </div>  )
 }
 

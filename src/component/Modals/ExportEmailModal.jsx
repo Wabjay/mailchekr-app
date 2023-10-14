@@ -62,6 +62,42 @@ const ExportEmailModal = ({ open, openFunction, id }) => {
         }
     };
 
+    // const exportMail = () => {
+    //   const purl = `generate-pdf/${radioValue === "success" ? `success/${id}` : radioValue === "fail" ? `failed/${id}` : `${id}`}`
+    //   const pdfUrl = 'https://mail-checkr-api.onrender.com/api/' + purl
+    //   try {
+    //      axios
+    //       .get(purl, {
+    //         responsetype: "blob",
+    //         headers: {
+    //           "Content-Type": "application/pdf",
+    //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //         },
+    //       })
+    //       .then((response) => {
+    //         //create a blob from the pdf stream
+    //         readFile(response) {
+    //           const reader = new FileReader();
+    //           const blob = new Blob([response.data], {type: "application/pdf"}); // works as expected
+    //           // const fileurl = URL.createObjectURL(file);
+    //         }
+    //         // const file = new Blob([response.data], { type: "application/pdf" });
+    //         //build a url from the file
+    //         const fileurl = pdfUrl.createObjectURL(blob);
+    //         console.log(file)
+    //         console.log(fileurl)
+    //         //open the url on new window
+    //         //  const pdfwindow = window.open();
+    //         //  pdfwindow.location.href = fileurl;            
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //   } catch (error) {
+    //     return { error };
+    //   }
+    // }
+
   return (
     <>
     {showModal && (
@@ -111,6 +147,7 @@ const ExportEmailModal = ({ open, openFunction, id }) => {
             <button 
             className="mt-[40px] w-fit px-4 h-9 flex justify-start items-center text-center text-grey-900 text-sm font-medium leading-[20px] rounded-[8px] border-[1px] border-yellow-400 bg-yellow-400"
             onClick={exportEmails}
+              // onClick={exportMail}
             >Export Emails</button>
           </div>
         </div>

@@ -1,36 +1,35 @@
-import { useEffect, useState } from "react";
-import Layout from "../component/Layouts/Layout"
+import { useContext, useMemo, useState } from "react";
 import Heading from "../component/Others/Heading"
 import ExportEmailModal from "../component/Modals/ExportEmailModal";
 import Main from "../component/Layouts/Main";
 import TableList from "../component/Tables/Table";
 import { presidents } from "../component/Tables/president";
 import axios from "../helper/api/axios";
+import { UserContext } from "../context/UserContext";
 
 const Emails = () => {
   const [openModal, setOpenModal] = useState(false);
   const [emails, setEmail] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  
+  const {token} = useContext(UserContext)
   const exportEmail = (resp) => {
     resp ? setOpenModal(resp) : setOpenModal(resp); // resp = true || false
   };
 
-  useEffect(()=> {
+  useMemo(()=> {
     setLoading(true)
     try {
       axios.get('validatedEntries',
           {
               headers: { 
                 'Content-Type': 'application/json',
-                Authorization : `Bearer ${localStorage.getItem('token')}`
+                Authorization : `Bearer ${token}`
                },
           }
       )
       .then(res => {
-        console.log(res.data.data)
-        res.data.data.map(email => setEmail(email.validations.map(mail => [...emails, mail]) ))
+        // res.data.data.map(email => setEmail(email.validations.map(mail => [...emails, mail]) )) 
         const data = res.data.data.map(email => email.validations)
           data.map(email => email.map(mail => emails.push(mail)))
         console.log(emails)
@@ -83,8 +82,10 @@ const Emails = () => {
 ]
   
   return (
-    <Layout>
-       <Heading text={`All Emails`}>
+    !loading &&
+    <>
+    
+       <Heading text={`All Emails (${emails.length})`}>
           <button
             onClick={exportEmail}
             className="bg-yellow-400 rounded-[8px] py-3 px-4 text-grey-900 font-medium text-sm leading-[20px]"
@@ -100,7 +101,7 @@ Export
 
         <ExportEmailModal open={openModal} openFunction={exportEmail} />
 
-    </Layout>
+    </>
   )
 }
 

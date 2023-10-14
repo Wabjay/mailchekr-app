@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import axios from "../helper/api/axios";
 import { UserContext } from "../context/UserContext";
 import { Sorter } from "../component/sorter";
-import Table from "../component/Tables/AntTable";
+// import Table from "../component/Tables/AntTable";
 
 
 const Tables = () => {
@@ -17,7 +17,7 @@ const Tables = () => {
   const [emails, setEmails] = useState([]);
   const [entryName, setEntryName] = useState("");
 
-  const { loading, setLoading } = useContext(UserContext);
+  const {token, loading, setLoading } = useContext(UserContext);
   const [id, setId] = useState("");
   const location = useLocation().pathname;
 
@@ -148,7 +148,7 @@ const Tables = () => {
         .get(`validatedEntries/${tableId}`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((res) => {
@@ -168,7 +168,8 @@ const Tables = () => {
  
 
   return (
-    <Layout>
+    <>
+    {/* <Layout> */}
       <Heading back={true} text={`${entryName} `}>
         <button
           onClick={exportEmail}
@@ -187,7 +188,8 @@ const Tables = () => {
       </Main>
 
       <ExportEmailModal open={openModal} openFunction={exportEmail} id={id} />
-    </Layout>
+    {/* </Layout> */}
+    </>
   );
 };
 

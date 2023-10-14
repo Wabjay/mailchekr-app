@@ -5,7 +5,7 @@ import AuthLayout from '../../component/Layouts/AuthLayout'
 const Register = () => {
 
   
-  const email = localStorage.getItem('email')
+  const email = sessionStorage.getItem('email')
 
 
   return ( 

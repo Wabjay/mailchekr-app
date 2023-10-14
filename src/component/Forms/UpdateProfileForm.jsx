@@ -5,7 +5,7 @@ import axios from "../../helper/api/axios";
 
 const UpdateProfileForm = () => {
 
-  const user = useContext(UserContext);
+  const {user, token} = useContext(UserContext);
   const navigate = useNavigate();
 
     const [loading,setLoading]= useState(false)
@@ -32,7 +32,7 @@ const UpdateProfileForm = () => {
             {
               headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${token}`,
               },
             }
           );
@@ -66,11 +66,11 @@ const UpdateProfileForm = () => {
             .get(`userAuth/logout`, {
               headers: {
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${localStorage.getItem("token")}`,
+                // Authorization: `Bearer ${token}`,
               },
             })
             .then((res) => {
-              localStorage.clear()
+              sessionStorage.clear()
               console.log(res)
               user.setLogin(false)
               // navigate(`/auth`)

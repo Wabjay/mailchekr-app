@@ -19,7 +19,7 @@ const Home = () => {
   const [emails, setEmail] = useState([]);
 
 
-const {user, setLoading} = useContext(UserContext)
+const {user, token, setLoading, loading} = useContext(UserContext)
 
 
   const validateEmail = (resp) => {
@@ -33,7 +33,7 @@ const {user, setLoading} = useContext(UserContext)
           {
               headers: { 
                 'Content-Type': 'application/json',
-                Authorization : `Bearer ${localStorage.getItem('token')}`
+                Authorization : `Bearer ${token}`
                },
           }
           
@@ -111,7 +111,7 @@ let navigate = useNavigate();
 
   return (
     <>
-      <Layout>
+      {/* <Layout loading={loading}> */}
         <Heading text={`Hello ${user?.displayName},`}>
           <button
             onClick={validateEmail}
@@ -133,7 +133,7 @@ let navigate = useNavigate();
 
         </Main>
         <ValidateEmailModal open={openModal} openFunction={validateEmail} />
-      </Layout>
+      {/* </Layout> */}
     </>
   );
 };

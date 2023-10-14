@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { TableContext, UserContext } from "./context/UserContext";
 import axios from "./helper/api/axios";
 import { TailSpin } from "react-loader-spinner";
+import Layout from "./component/Layouts/Layout";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -21,15 +22,16 @@ function App() {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
-    // setUser(JSON.parse(localStorage.getItem('user')))
+    setToken(sessionStorage.getItem("token"));
+    // setUser(JSON.parse(sessionStorage.getItem('user')))
     setLoading(true);
+    console.log(loading)
     try {
       axios
         .get("userAuth/userData", {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
         })
         .then((response) => {
@@ -50,7 +52,7 @@ function App() {
       //     setErrMsg('Login Failed');
       // }
       // errRef.current.focus();
-      setUser(localStorage.getItem("user"));
+      setUser(sessionStorage.getItem("user"));
       setLoading(false);
     }
     setLoading(false);
@@ -76,7 +78,10 @@ function App() {
               />{" "}
             </div>
           ) : token ? (
+            
             <BrowserRouter>
+            <Layout />
+              <div className="mt-[56px] py-5 px-4 md:px-6 lg:py-[42px] lg:mt-0 lg:ml-[256px] xl:px-8 text-UntitledSans">
               <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/emails" element={<Emails />} />
@@ -86,6 +91,7 @@ function App() {
                 {/* <Route exact path="/project/:id" element={<Project />} /> */}
                 <Route path="*" element={<Home />} />
               </Routes>
+                </div>
             </BrowserRouter>
           ) : (!login && (
             <BrowserRouter>

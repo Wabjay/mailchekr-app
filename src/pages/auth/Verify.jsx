@@ -33,9 +33,9 @@ const Verify = () => {
       registered ? navigate(`/`) : navigate("/signup");
       console.log(user.token);
       const tokens = accessToken.replaceAll('"', "");
-      localStorage.setItem("token", tokens);
-      localStorage.setItem("user", users);
-      localStorage.setItem("email", email);
+      sessionStorage.setItem("token", tokens);
+      sessionStorage.setItem("user", users);
+      sessionStorage.setItem("email", email);
       user.setUser(users);
       user.setToken(tokens);
       console.log(user);

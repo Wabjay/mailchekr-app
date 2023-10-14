@@ -17,7 +17,8 @@ const Settings = () => {
   console.log(tab)
 }
     return (
-        <Layout>
+      <>
+        {/* // <Layout> */}
            <Heading text="Settings"/>
            <SettingsTab active={activeTab}/>
            <Main>
@@ -27,7 +28,8 @@ const Settings = () => {
 }
           
            </Main>
-        </Layout>
+        {/* // </Layout> */}
+        </>
       )
     }
 
