@@ -10,7 +10,7 @@ const EmailForm = ({ email }) => {
   const emailRef = useRef();
 
   const [mail, setEnterEmail] = useState("");
-  const [errMsg, setErrMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("No Server Response");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -60,6 +60,7 @@ const EmailForm = ({ email }) => {
       } else if (err.response?.status === 404) {
         navigate(`/signup`)
         localStorage.setItem('email', mail)
+        sessionStorage.setItem('email', mail)
         setErrMsg("User does not exist, PLease create an Account");
         console.log("User does not exist, PLease create an Account");
 
@@ -67,7 +68,7 @@ const EmailForm = ({ email }) => {
         setErrMsg("Login Failed");
       }
     setLoading(false)
-
+    setTimeout(() => {setErrMsg("")}, 2000);
       // errRef.current.focus();
     }
   };
@@ -119,6 +120,9 @@ const EmailForm = ({ email }) => {
         />
         
         </button>
+        {errMsg!=="" && (
+          <div className="bg-red-500 text-white lowercase mx-auto mt-3 p-1 px-4 border-red-500 border-[1px] w-fit rounded-md">{errMsg}</div>
+        )}
       </form>
     </div>
   );

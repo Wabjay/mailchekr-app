@@ -5,7 +5,7 @@ import axios from "../../helper/api/axios";
 
 const RegisterForm = ({email}) => {
 
-    const [username, setUsername] = useState("Enter your preferred  Username");
+    const [username, setUsername] = useState(`@`);
     const [mail, setEmail] = useState(email);
     const [firstName, setFirstName] = useState("Enter your first Name");
     const [lastName, setLastName] = useState("Enter your last name");
@@ -64,7 +64,7 @@ const RegisterForm = ({email}) => {
           <div className="">{/* Input text  */}
             <p className="text-sm font-medium leading-[20px] text-grey-900 mb-2">Email Address</p>
             <input type="text" className="py-2 px-4 text-sm leading-[20px] rounded-[8px] border-[1px] border-grey-300 bg-grey-50  w-full"
-            name="email" id="" placeholder={mail} onChange={(e)=> setEmail(e.target.value)} disabled/>
+            name="email" id="" placeholder={mail} value={email} onChange={(e)=> setEmail(e.target.value)} disabled/>
           </div>
           <div className="flex gap-6 mt-6 w-full">
              <div className=" w-full">{/* Input text  */}
@@ -82,12 +82,12 @@ const RegisterForm = ({email}) => {
           <div className="mt-6">{/* Input text  */}
             <p className="text-sm font-medium leading-[20px] text-grey-900 mb-2">Username</p>
             <input type="text" className="py-2 px-4 text-[16px] leading-[22px] rounded-[8px] border-[1px] border-grey-300 bg-white  w-full"
-            name="username" id="" placeholder={username} onChange={(e)=> setUsername(e.target.value)}/>
+            name="username" value={`${username}`} id="" placeholder={username} onChange={(e)=> setUsername(e.target.value)}/>
           </div>
           
           <button
             onClick={RegisterProfile}
-            className="bg-white rounded-[8px] border border-yellow-600 py-3 px-4 mt-10 w-fit text-yellow-600 font-medium text-sm leading-[20px]"
+            className="bg-white rounded-[8px] border border-yellow-600 py-3 px-4 mt-10 w-full text-yellow-600 font-medium text-sm leading-[20px] flex justify-center gap-2"
           >
            
             <span> Sign Up</span>  

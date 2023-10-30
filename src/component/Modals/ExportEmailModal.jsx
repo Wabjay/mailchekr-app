@@ -41,19 +41,26 @@ const ExportEmailModal = ({ open, openFunction, id }) => {
       setLoader(true);
         try {
           axios
-            .get(`generate-pdf/${radioValue === "success" ? `success/${id}` : radioValue === "fail" ? `failed/${id}` : `${id}`}`, {
+          .get(`generate-pdf/${radioValue === "success" ? `success/${id}` : radioValue === "fail" ? `failed/${id}` : `${id}`}`, {
+              responseType: 'arraybuffer',
               headers: {
                 "Content-Type": "application/pdf",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
               },
             })
             .then((res) => {
+              setLoader(false);
               // res.blob()
-              setPdf(res.data)
+              const url = window.URL.createObjectURL(new Blob([res.data]))
+              const link = document.createElement('a');
+              link.href = url;
+              link.setAttribute('download', 'reciept.pdf')
+              document.body.appendChild(link)
+              link.click
+              // setPdf(res.data)
               console.log(res.data);
          
             })
-            setLoader(false);
            
             
         } catch (err) {
