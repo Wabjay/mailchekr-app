@@ -16,7 +16,7 @@ const RegisterForm = ({email}) => {
     
       const RegisterProfile = async (e) => {
         e.preventDefault();
-        console.log(e)
+        // console.log(e)
         setLoading(true)
         const payload = {
           "email": mail,
@@ -31,11 +31,11 @@ const RegisterForm = ({email}) => {
               headers: { "Content-Type": "application/json" },
             }
           );
-          console.log(JSON.stringify(response?.data));
-          console.log(JSON.stringify(response));
+          // console.log(JSON.stringify(response?.data));
+          // console.log(JSON.stringify(response));
         setLoading(false)
         navigate(`/verify/${email}`)
-        console.log(`/verify/${email}`)
+        // console.log(`/verify/${email}`)
     
         } catch (err) {
           if (!err?.response) {

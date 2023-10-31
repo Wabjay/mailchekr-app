@@ -47,6 +47,7 @@ const EmailForm = ({ email }) => {
         email(mail);
         setSuccess(success);
     setLoading(false)
+    sessionStorage.setItem('email', mail)
     navigate(`/verify/${mail}`)
 
     } catch (err) {

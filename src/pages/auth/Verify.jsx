@@ -13,6 +13,8 @@ const Verify = () => {
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
+const email = sessionStorage.getItem('email')
+
   const verified = async () => {
     setLoading(true);
     try {
@@ -70,7 +72,7 @@ const Verify = () => {
           We’ve sent a temporary login link and a secret code.
         </p>
         <p className="w-full max-w-[385px] text-center text-grey-900 text-[14px] lg:text-[16px] leading-[22px] mb-6">
-          Please check your inbox at Johndoe@gmail.com
+          Please check your inbox at {email}
         </p>
       </div>
 
