@@ -17,8 +17,8 @@ const AuthLayout = (props) => {
       </p>
       {/* <GoogleLogin login={props.login} /> */}
 
-      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_ID}>
-          <GoogleLogins/>
+      <GoogleOAuthProvider clientId={clientId}>
+          {/* <GoogleLogins/> */}
           {/* <GoogleLogins /> */}
         </GoogleOAuthProvider>
       {props.children}
