@@ -27,6 +27,7 @@ function App() {
     setLoading(true);
     console.log(loading)
     try {
+      token !== "", login === true &&
       axios
         .get("userAuth/userData", {
           headers: {

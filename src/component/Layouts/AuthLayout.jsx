@@ -3,7 +3,7 @@ import Logo from "../../assets/images/logo.svg";
 
 // import GoogleLogins from "../auth/GoogleLogin";
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import GoogleLogin from "../auth/GoogleLogin copy";
+import GoogleLogins from "../auth/GoogleLogin copy";
 
 const AuthLayout = (props) => {
 
@@ -18,7 +18,7 @@ const AuthLayout = (props) => {
       {/* <GoogleLogin login={props.login} /> */}
 
       <GoogleOAuthProvider clientId={clientId}>
-          <GoogleLogin/>
+          <GoogleLogins/>
           {/* <GoogleLogins /> */}
         </GoogleOAuthProvider>
       {props.children}

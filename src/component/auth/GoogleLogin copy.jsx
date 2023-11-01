@@ -1,18 +1,18 @@
 import Google from "../../assets/images/google.svg";
-import { useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin  } from "@react-oauth/google";
 import { useState } from "react";
 
 import axios from "../../helper/api/axios";
 import { useNavigate } from "react-router-dom";
 
-const GoogleLogin = () => {
+const GoogleLogins = () => {
 
   // const [signIn, setSignIn] = useState(false)
 
 
   const navigate = useNavigate()
 
-  const signIn =  (useGoogleLogin(
+  const signIn =  useGoogleLogin(
    { 
   //  onSuccess:tokenResponse => console.log(tokenResponse),
    onSuccess: async tokenResponse => {
@@ -34,21 +34,22 @@ const GoogleLogin = () => {
      );
        // setSuccess(success);
    sessionStorage.setItem('email', userInfo.email)
-   navigate(`/verify/${ userInfo.email }`)
-
+   navigate(`/verify/${userInfo.email }`)
    },
    // flow: 'redirect',
    // signInFlow: "redirect",
    onError: () => console.log('Login Failed'),
  },
  console.log("first")
- ));
+ );
+
 
 
   return (
+
     <button
+    onClick={()=>signIn()}
       className="w-full h-12 flex justify-center items-center text-center text-grey-900 text-[16px] font-medium leading-[22px] rounded-[8px] border-[1px] border-yellow-400 bg-yellow-400"
-      onClick={signIn}
     >
       <img src={Google} className="h-[18px] w-[18px] mr-1" />
       Continue with Google
@@ -56,4 +57,4 @@ const GoogleLogin = () => {
   );
 };
 
-export default GoogleLogin;
+export default GoogleLogins;
