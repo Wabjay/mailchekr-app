@@ -2,7 +2,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import Google from "../../assets/images/google.svg";
 import axios from '../../helper/api/axios';
 import { useNavigate } from "react-router";
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const GoogleLogins = () => {
 
@@ -46,7 +46,7 @@ const GoogleLogins = () => {
     <>
     <button
           className="w-full h-12 flex justify-center items-center text-center text-grey-900 text-[16px] font-medium leading-[22px] rounded-[8px] border-[1px] border-yellow-400 bg-yellow-400"
-          onClick={signIn}
+          // onClick={signIn}
         >
           <img src={Google} className="h-[18px] w-[18px] mr-1" />
           Continue with Google

@@ -16,9 +16,9 @@ const AuthLayout = (props) => {
       </p>
       {/* <GoogleLogin login={props.login} /> */}
 
-      {/* <GoogleOAuthProvider clientId={clientId}> */}
+      <GoogleOAuthProvider clientId={clientId}>
           <GoogleLogins />
-        {/* </GoogleOAuthProvider> */}
+        </GoogleOAuthProvider>
       {props.children}
     </div>
   );
