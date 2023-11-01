@@ -41,7 +41,7 @@ const GoogleLogins = () => {
    sessionStorage.setItem('email', userInfo.email)
    navigate(`/verify/${userInfo.email }`)
    },
-   // flow: 'redirect',
+   flow: 'auth-code',
    // signInFlow: "redirect",
    onError: () => console.log('Login Failed'),
  },
