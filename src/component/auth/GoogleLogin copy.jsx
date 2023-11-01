@@ -1,50 +1,46 @@
-import React, { useState } from "react";
 import Google from "../../assets/images/google.svg";
 import { useGoogleLogin } from "@react-oauth/google";
 
 import axios from "../../helper/api/axios";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
 
-const GoogleLogin = ({ login }) => {
-  const [loading, setLoading] = useState(false);
-  const [errmsg, setErrMsg] = useState(false);
+const GoogleLogin = () => {
 
 
 
   const navigate = useNavigate()
 
-//   const signIn = useGoogleLogin(
-//    { 
-//    // onSuccess:tokenResponse => console.log(tokenResponse),
-//    onSuccess: async tokenResponse => {
-//      console.log(tokenResponse);
-//      // fetching userinfo can be done on the client or the server
-//      const userInfo = await axios
-//        .get('https://www.googleapis.com/oauth2/v3/userinfo', {
-//          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-//        })
-//        .then(res => res.data);
+  const signIn = useGoogleLogin(
+   { 
+   // onSuccess:tokenResponse => console.log(tokenResponse),
+   onSuccess: async tokenResponse => {
+     console.log(tokenResponse);
+     // fetching userinfo can be done on the client or the server
+     const userInfo = await axios
+       .get('https://www.googleapis.com/oauth2/v3/userinfo', {
+         headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+       })
+       .then(res => res.data);
 
-//      console.log(userInfo);
-//      await axios.post(
-//        "userAuth/sign-in",
-//        { email: userInfo.email },
-//        {
-//          headers: { "Content-Type": "application/json" },
-//        }
-//      );
-//        // setSuccess(success);
-//    sessionStorage.setItem('email', userInfo.email)
-//    navigate(`/verify/${ userInfo.email }`)
+     console.log(userInfo);
+     await axios.post(
+       "userAuth/sign-in",
+       { email: userInfo.email },
+       {
+         headers: { "Content-Type": "application/json" },
+       }
+     );
+       // setSuccess(success);
+   sessionStorage.setItem('email', userInfo.email)
+   navigate(`/verify/${ userInfo.email }`)
 
-//    },
-//    // flow: 'redirect',
-//    // signInFlow: "redirect",
-//    onError: () => console.log('Login Failed'),
-//  },
-//  // console.log("first")
-//  );
+   },
+   // flow: 'redirect',
+   // signInFlow: "redirect",
+   onError: () => console.log('Login Failed'),
+ },
+ // console.log("first")
+ );
 
 
   return (
