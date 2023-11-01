@@ -17,7 +17,8 @@ const GoogleLogins = () => {
 //     console.log(email)
 //     navigate(`/verify/${email}`)
 // }
-   useGoogleLogin(
+  //  useGoogleLogin
+   (
    { 
   //  onSuccess:tokenResponse => console.log(tokenResponse),
    onSuccess: async tokenResponse => {
@@ -53,7 +54,7 @@ const GoogleLogins = () => {
   return (
 
     <button
-    // onClick={()=>signIn()}
+    onClick={()=>signIn()}
       className="w-full h-12 flex justify-center items-center text-center text-grey-900 text-[16px] font-medium leading-[22px] rounded-[8px] border-[1px] border-yellow-400 bg-yellow-400"
     >
       <img src={Google} className="h-[18px] w-[18px] mr-1" />
