@@ -10,8 +10,7 @@ const GoogleLogin = () => {
 
   const navigate = useNavigate()
 
-  const SignIn = () => (
-    useGoogleLogin(
+  const SignIn = useGoogleLogin(
    { 
   //  onSuccess:tokenResponse => console.log(tokenResponse),
    onSuccess: async tokenResponse => {
@@ -40,7 +39,7 @@ const GoogleLogin = () => {
    // signInFlow: "redirect",
    onError: () => console.log('Login Failed'),
  },
- console.log("first"))
+ console.log("first")
  );
 
 
