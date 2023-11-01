@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../../assets/images/logo.svg";
 
-import GoogleLogins from "../auth/GoogleLogin";
+// import GoogleLogins from "../auth/GoogleLogin";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import GoogleLogin from "../auth/GoogleLogin copy";
 
