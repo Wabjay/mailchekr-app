@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const GoogleLogins = () => {
 
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
 
 
   const navigate = useNavigate()
@@ -31,7 +31,7 @@ const GoogleLogins = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-        setSuccess(success);
+        // setSuccess(success);
     sessionStorage.setItem('email', userInfo.email)
     navigate(`/verify/${ userInfo.email }`)
 
