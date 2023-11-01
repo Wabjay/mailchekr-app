@@ -1,13 +1,43 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import Google from "../../assets/images/google.svg";
+import axios from '../../helper/api/axios';
+import { useNavigate } from "react-router";
+import { useState } from 'react';
 
 const GoogleLogins = () => {
 
+  const [success, setSuccess] = useState(false);
+
+
+  const navigate = useNavigate()
 
    const signIn = useGoogleLogin(
     { 
-    onSuccess:tokenResponse => console.log(tokenResponse),
-    flow: 'redirect',
+    // onSuccess:tokenResponse => console.log(tokenResponse),
+    onSuccess: async tokenResponse => {
+      console.log(tokenResponse);
+      // fetching userinfo can be done on the client or the server
+      const userInfo = await axios
+        .get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        })
+        .then(res => res.data);
+
+      console.log(userInfo);
+      await axios.post(
+        "userAuth/sign-in",
+        { email: userInfo.email },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+        setSuccess(success);
+    sessionStorage.setItem('email', userInfo.email)
+    navigate(`/verify/${ userInfo.email }`)
+
+    },
+    // flow: 'redirect',
+    // signInFlow: "redirect",
     onError: () => console.log('Login Failed'),
   },
   // console.log("first")
