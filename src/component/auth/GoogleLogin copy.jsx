@@ -10,7 +10,7 @@ const GoogleLogin = () => {
 
   const navigate = useNavigate()
 
-  const SignIn = useGoogleLogin(
+  const SignIn =()=> useGoogleLogin(
    { 
   //  onSuccess:tokenResponse => console.log(tokenResponse),
    onSuccess: async tokenResponse => {
