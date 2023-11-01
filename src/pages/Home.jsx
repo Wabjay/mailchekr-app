@@ -122,7 +122,7 @@ let navigate = useNavigate();
         </Heading>
 
         <div className="flex flex-col md:flex-row flex-wrap gap-6 mb-4 md:mb-[22px] lg:mb-6">
-          <OverviewCard amount={30455} label="No of valid emails" />
+          <OverviewCard amount={validations} label="No of valid emails" />
           <OverviewCard amount={validations} label={`No of validations`} />
         </div>
 <p className="text-[16px] font-bold leading-[22px] text-grey-900 mb-4 md:mb-[22px] lg:mb-6">Validation entries</p>
