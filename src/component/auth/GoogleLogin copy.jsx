@@ -12,14 +12,13 @@ const GoogleLogins = () => {
 
   const navigate = useNavigate()
 
-  const SignIn =()=>
+  const SignIn =
 //   (email) => {
 //     console.log(email)
 //     navigate(`/verify/${email}`)
 // }
-   useGoogleLogin
-   (
-   { 
+   useGoogleLogin(
+    { 
   //  onSuccess:tokenResponse => console.log(tokenResponse),
    onSuccess: async tokenResponse => {
      console.log(tokenResponse);

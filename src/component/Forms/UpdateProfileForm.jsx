@@ -5,7 +5,7 @@ import axios from "../../helper/api/axios";
 
 const UpdateProfileForm = () => {
 
-  const {user, token} = useContext(UserContext);
+  const {user, token, setLogin} = useContext(UserContext);
   const navigate = useNavigate();
 
     const [loading,setLoading]= useState(false)
@@ -71,9 +71,10 @@ const UpdateProfileForm = () => {
             })
             .then((res) => {
               sessionStorage.clear()
+              // browser.cookies.remove();
               console.log(res)
-              user.setLogin(false)
-              // navigate(`/auth`)
+              setLogin(false)
+              navigate(`/auth`)
               setLoading(false);
 
             });

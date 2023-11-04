@@ -88,7 +88,7 @@ const email = sessionStorage.getItem('email')
           color="#B88700"
           ariaLabel="tail-spin-loading"
           radius="2"
-          wrapperStyle={{ paddingRight: "8px" }}
+          wrapperStyle={{ paddingLeft: "8px" }}
           wrapperClass=""
           visible={loading}
         />
