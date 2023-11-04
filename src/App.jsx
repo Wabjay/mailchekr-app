@@ -28,6 +28,7 @@ function App() {
     setLoading(true);
     console.log(loading)
     try {
+      Object.keys(token).length !== 0 &&
       axios
         .get("userAuth/userData", {
           headers: {
