@@ -72,7 +72,7 @@ const GoogleLogins = () => {
       {theme: "outline", size: "large", width: 400 }
     );
 
-    google.accounts.id.prompt();
+    // google.accounts.id.prompt();
 
   }, [])
 
