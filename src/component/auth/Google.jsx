@@ -23,7 +23,7 @@ const GoogleLogins = () => {
     }
     try {
        await axios.post(
-        "userAuth/sign-in", payload,
+        "userAuth/sign-in", {email: payload.email},
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -32,10 +32,81 @@ const GoogleLogins = () => {
     navigate(`/verify/${user.email}`)
 
     } catch (err) {
-     
-console.log(err)
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      }else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else if (err.response?.status === 404) {
+        try {
+          const response = await axios.post(
+            "userAuth/sign-up", payload,
+            {
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+        setLoading(false)
+        navigate(`/verify/${email}`)    
+        } catch (err) {
+          if (!err?.response) {
+            setErrMsg("No Server Response");
+          } else {
+            setErrMsg("Login Failed");
+          }
+        setLoading(false)
+    
+        }
+      } else {
+        setErrMsg("Login Failed");
+      }
+    setLoading(false)
+    setTimeout(() => {setErrMsg("")}, 2000);
+      // errRef.current.focus();
+    }
     }
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(e)
+    setLoading(true)
+    !emailRegex.test(mail) && setSuccess(true);
+    try {
+      await axios.post(
+        "userAuth/sign-in",
+        { email: mail },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+        email(mail);
+        setSuccess(success);
+    setLoading(false)
+    sessionStorage.setItem('email', mail)
+    navigate(`/verify/${mail}`)
+
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing Username or Password");
+
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else if (err.response?.status === 404) {
+        navigate(`/signup`)
+        localStorage.setItem('email', mail)
+        sessionStorage.setItem('email', mail)
+        setErrMsg("User does not exist, PLease create an Account");
+        console.log("User does not exist, PLease create an Account");
+
+      } else {
+        setErrMsg("Login Failed");
+      }
+    setLoading(false)
+    setTimeout(() => {setErrMsg("")}, 2000);
+      // errRef.current.focus();
+    }
+  };
 
   const clientID = '663993483325-oe5t25cc4ugggirhvhtlt1d76nt6jke3.apps.googleusercontent.com'
 
