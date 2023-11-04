@@ -13,7 +13,7 @@ const GoogleLogins = () => {
 
   const signIn = async (response) => {
     let user = jwtDecode(response.credential);
-    console.log(user,'clicked')
+    console.log(user)
     const payload = {
       "email": user.email,
       "firstName": user.given_name,
@@ -37,7 +37,7 @@ console.log(err)
     }
   }
 
-  const clientID = import.meta.env.VITE_GOOGLE_ID
+  const clientID = '663993483325-oe5t25cc4ugggirhvhtlt1d76nt6jke3.apps.googleusercontent.com'
 
   useEffect(() => {
     /* global google */
@@ -50,7 +50,7 @@ console.log(err)
       {theme: "outline", size: "large", width: 400 }
     );
 
-    // google.accounts.id.prompt();
+    google.accounts.id.prompt();
 
   }, [])
 
@@ -61,7 +61,7 @@ console.log(err)
 <button
       className="relative overflow-hidden w-full h-12 flex justify-center items-center text-center text-grey-900 text-[16px] font-medium leading-[22px] rounded-[8px] border-[1px] border-yellow-400 bg-yellow-400"
     >
-<div id="signInDiv" className="w-full h-full absolute right-0 left-[6%] opacity-[0.01] z-20"></div>
+<div id="signInDiv" className="w-full h-full absolute right-0 left-[6%] opacity-[0.01]"></div>
       <img src={Google} className="h-[18px] w-[18px] mr-1" />
       Continue with Google
     </button>
