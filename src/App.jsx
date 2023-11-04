@@ -28,6 +28,7 @@ function App() {
     setLoading(true);
     console.log(loading)
     try {
+      // lOAD WHEN THERE IS TOKEN
       Object.keys(token).length !== 0 &&
       axios
         .get("userAuth/userData", {
