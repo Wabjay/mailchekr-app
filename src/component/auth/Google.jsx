@@ -41,7 +41,7 @@ console.log(err)
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
-      client_id: '663993483325-oe5t25cc4ugggirhvhtlt1d76nt6jke3.apps.googleusercontent.com',
+      client_id: import.meta.env.VITE_GOOGLE_ID,
       callback: signIn
     });
     google.accounts.id.renderButton(
@@ -49,7 +49,7 @@ console.log(err)
       {theme: "outline", size: "large", width: 400 }
     );
 
-    google.accounts.id.prompt();
+    // google.accounts.id.prompt();
 
   }, [])
 
@@ -60,7 +60,7 @@ console.log(err)
 <button
       className="relative overflow-hidden w-full h-12 flex justify-center items-center text-center text-grey-900 text-[16px] font-medium leading-[22px] rounded-[8px] border-[1px] border-yellow-400 bg-yellow-400"
     >
-<div id="signInDiv" className="w-full h-full absolute right-0 left-[6%] opacity-0"></div>
+<div id="signInDiv" className="w-full h-full absolute right-0 left-[6%] opacity-0.5"></div>
       <img src={Google} className="h-[18px] w-[18px] mr-1" />
       Continue with Google
     </button>
