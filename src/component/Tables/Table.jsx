@@ -1,5 +1,5 @@
 import { Table } from "antd"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import ValidateEmailModal from "../Modals/ValidateEmailModal"
 import { UserContext } from "../../context/UserContext"
 import Spinner from "../Others/Spinner"
@@ -14,12 +14,14 @@ const [pageSize, setPageSize] = useState(10)
 const [selectedRowKeys, setSelectedRowKeys] = useState([])
 const [openModal, setOpenModal] = useState(false);
 
-const {loading} = useContext(UserContext)
+const {loading, setLoading} = useContext(UserContext)
 
 console.log(loading)
 const validateEmail = (resp) => {
   resp ? setOpenModal(resp) : setOpenModal(resp); // resp = true || false
 };
+
+
 
 const onSelectChange = (newSelectedRowKeys) => {
   console.log('selectedRowKeys changed: ', newSelectedRowKeys);
@@ -29,6 +31,16 @@ const onSelectChange = (newSelectedRowKeys) => {
 
 
 const { columns, dataSource, selection, ...otherTableProps } = props;
+
+// useEffect(() => {
+//   if(Object.keys(dataSource).length != 0){
+//  console.log("dataSource : Data loaded", Object.keys(dataSource).length),
+//     setLoading(false)
+//   } else {
+//      setLoading(true), 
+//   console.log("dataSource : Data not loaded",  Object.keys(dataSource).length)
+//   }
+// }, [dataSource, loading])
 
 const sortableColumns = columns.map((column) => {
   const { sorter, dataIndex, ...otherColumnProps } = column;

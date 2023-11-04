@@ -14,6 +14,7 @@ import { Sorter } from "../component/sorter";
 
 const Tables = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [emails, setEmails] = useState([]);
   const [entryName, setEntryName] = useState("");
 
@@ -134,6 +135,7 @@ const Tables = () => {
   ];
 
   useEffect( () => {
+    console.log(loading)
     const url = location.split("/");
     setId(url.slice(-1)[0]);
     const tableId = (url.slice(-1)[0])
@@ -143,6 +145,7 @@ const Tables = () => {
 
 
   const loadTable = (tableId)=>{
+    setLoading(true);
      try {
       axios
         .get(`validatedEntries/${tableId}`, {
@@ -155,13 +158,16 @@ const Tables = () => {
           console.log(res.data.data);
           setEmails(res.data.data);
           setEntryName(res.data.data[0].entryName);
-          setLoading(false);
+          setLoaded(true);
           console.log(id)
         });
       setLoading(false);
+          // setLoaded(true);
     } catch (err) {
       console.log(err); 
       setLoading(false);
+          // setLoaded(true);
+
     }
   }
    

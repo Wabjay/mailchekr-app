@@ -1,17 +1,19 @@
-import { useEffect } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Google from "../../assets/images/google.svg";
 import { jwtDecode } from "jwt-decode";
 import axios from "../../helper/api/axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 const GoogleLogins = () => {
 
   // const [signIn, setSignIn] = useState(false)
-
+const {setLoading} = useContext(UserContext)
 
   const navigate = useNavigate()
 
   const signIn = async (response) => {
+    setLoading(true)
     let user = jwtDecode(response.credential);
     console.log(user)
     const payload = {
@@ -30,7 +32,7 @@ const GoogleLogins = () => {
       );
    sessionStorage.setItem('email', user.email)
     navigate(`/verify/${user.email}`)
-
+setLoading(false)
     } catch (err) {
        if (err.response?.status === 401) {
         setErrMsg("Unauthorized");
@@ -42,41 +44,43 @@ const GoogleLogins = () => {
               headers: { "Content-Type": "application/json" },
             }
           );
-        // setLoading(false)
+        setLoading(false)
         navigate(`/verify/${payload.email}`)    
         } catch (err) {
       
-        //     setErrMsg("Login Failed");
-        // setLoading(false)
+            // setErrMsg("Login Failed");
+        setLoading(false)
     
         }
       } else {
-        setErrMsg("Login Failed");
+        console.log("Login Failed");
+        // setErrMsg("Login Failed");
       }
     // setLoading(false)
     // setTimeout(() => {setErrMsg("")}, 2000);
     }
+setLoading(false)
+
     }
   
 
   const clientID = '663993483325-oe5t25cc4ugggirhvhtlt1d76nt6jke3.apps.googleusercontent.com'
 
-  useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({ 
-      client_id: clientID,
-      callback: signIn
-    });
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      {theme: "outline", size: "large", width: 400 }
-    );
 
-    // google.accounts.id.prompt();
+  useEffect(()=> {
+  /* global google */
+  google.accounts.id.initialize({ 
+    client_id: clientID,
+    callback: signIn
+  });
+  google.accounts.id.renderButton(
+    document.getElementById("signInDiv"),
+    {theme: "outline", size: "large", width: 400 }
+  );
 
-  }, [])
+  // google.accounts.id.prompt();
 
-
+  },[])
 
  
   return (

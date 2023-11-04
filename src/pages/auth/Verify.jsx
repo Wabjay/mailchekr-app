@@ -8,10 +8,10 @@ import { TailSpin } from "react-loader-spinner";
 
 const Verify = () => {
   const navigate = useNavigate();
-  const user = useContext(UserContext);
+  const {setUser, user, setLoading, loading, setToken} = useContext(UserContext);
   const [otp, setOTP] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
 const email = sessionStorage.getItem('email')
 
@@ -31,15 +31,15 @@ const email = sessionStorage.getItem('email')
       const users = JSON.stringify(response?.data?.user);
       const email = JSON.stringify(response?.data?.user.email);
       const registered = response?.data?.user.displayName;
-
+        console.log(users, accessToken, registered)
       registered ? navigate(`/`) : navigate("/signup");
-      console.log(user.token);
       const tokens = accessToken.replaceAll('"', "");
       sessionStorage.setItem("token", tokens);
       sessionStorage.setItem("user", users);
       sessionStorage.setItem("email", email);
-      user.setUser(users);
-      user.setToken(tokens);
+      setUser(users);
+      console.log(tokens);
+      setToken(tokens);
       console.log(user);
       console.log(users, tokens);
       setLoading(false);

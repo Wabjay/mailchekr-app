@@ -1,33 +1,37 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import OverviewCard from "../component/Cards/OverviewCard";
-import Layout from "../component/Layouts/Layout";
+// import Layout from "../component/Layouts/Layout";
 import Main from "../component/Layouts/Main";
 import ValidateEmailModal from "../component/Modals/ValidateEmailModal";
 import Heading from "../component/Others/Heading";
 import { UserContext } from "../context/UserContext";
 import TableList from "../component/Tables/Table";
-import { presidents } from "../component/Tables/president";
+// import { presidents } from "../component/Tables/president";
 import { useNavigate } from "react-router-dom";
 import View from "../assets/images/view.svg"
 import axios from "../helper/api/axios";
 import { Sorter } from "../component/sorter";
+import Spinner from "../component/Others/Spinner";
 // import Table from "../component/Tables/AntTable";
 
 const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const [validations, setValidations] = useState(0);
   const [emails, setEmail] = useState([]);
+  const [emailLength, setEmailLength] = useState(0);
+  const [loader, setLoader] = useState(false);
 
 
-const {user, token, setLoading, loading} = useContext(UserContext)
+const {user, token, setLoading} = useContext(UserContext)
 
 
   const validateEmail = (resp) => {
     resp ? setOpenModal(resp) : setOpenModal(resp); // resp = true || false
   };
 
-  useEffect(()=> {
+  useMemo(()=> {
     setLoading(true)
+    setLoader(true);
     try {
       axios.get('validatedEntries',
           {
@@ -36,21 +40,27 @@ const {user, token, setLoading, loading} = useContext(UserContext)
                 Authorization : `Bearer ${token}`
                },
           }
-          
       )
       .then(res => {
           setEmail(res.data.data)
           setValidations(res.data.data.length)
-          console.log(res.data.data)
-    setLoading(false)
 
+          const data = res.data.data.map(email => email.validations)
+          data.map(email => email.map(mail => emails.push(mail)))
+        console.log(emails)
+        setEmailLength(emails.length)
+          console.log(res.data.data)
+    setLoader(false);
+    setLoading(false)
       }
       )
-      setLoading(false)
+    setLoader(false);
+    setLoading(false)
 
   } catch (err) {
     console.log(err)  
-      setLoading(false)
+    setLoader(false);
+    setLoading(false)
   }
   },[])
 
@@ -112,6 +122,8 @@ let navigate = useNavigate();
   return (
     <>
       {/* <Layout loading={loading}> */}
+      <Spinner loading={loader}/>
+
         <Heading text={`Hello ${user?.displayName},`}>
           <button
             onClick={validateEmail}
@@ -122,7 +134,7 @@ let navigate = useNavigate();
         </Heading>
 
         <div className="flex flex-col md:flex-row flex-wrap gap-6 mb-4 md:mb-[22px] lg:mb-6">
-          <OverviewCard amount={validations} label="No of valid emails" />
+          <OverviewCard amount={emailLength} label="No of valid emails" />
           <OverviewCard amount={validations} label={`No of validations`} />
         </div>
 <p className="text-[16px] font-bold leading-[22px] text-grey-900 mb-4 md:mb-[22px] lg:mb-6">Validation entries</p>

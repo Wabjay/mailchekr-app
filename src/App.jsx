@@ -14,6 +14,7 @@ import { TableContext, UserContext } from "./context/UserContext";
 import axios from "./helper/api/axios";
 import { TailSpin } from "react-loader-spinner";
 import Layout from "./component/Layouts/Layout";
+import Spinner from "./component/Others/Spinner";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -65,18 +66,7 @@ function App() {
       <TableContext.Provider value={{ user, setUser, token, setToken }}>
         <React.Fragment>
           {loading ? (
-            <div className="w-full h-full absolute top-0 left-0 flex justify-center items-center">
-              <TailSpin
-                height="300"
-                width="300"
-                color="#B88700"
-                ariaLabel="tail-spin-loading"
-                radius="2"
-                wrapperStyle={{ paddingRight: "8px" }}
-                wrapperClass=""
-                visible={loading}
-              />{" "}
-            </div>
+                  <Spinner loading={loading} />
           ) : token ? (
             
             <BrowserRouter>

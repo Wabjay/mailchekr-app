@@ -2,13 +2,14 @@ import { useContext, useState } from "react"
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "../../helper/api/axios";
+import Loader from "../Others/Loader";
 
 const UpdateProfileForm = () => {
 
-  const {user, token, setLogin} = useContext(UserContext);
+  const {user, token, setLogin, setLoading} = useContext(UserContext);
   const navigate = useNavigate();
 
-    const [loading,setLoading]= useState(false)
+    // const [loading,setLoading]= useState(false)
     const [errMsg, setErrMsg] = useState("");
     const [username, setUsername] = useState(user.displayName);
     const [email, setEmail] = useState(user.email);
@@ -18,7 +19,6 @@ const UpdateProfileForm = () => {
 
     const UpdateProfile = async () => {
         // API to Update Profile
-
         setLoading(true)
         const payload = {
           "firstName": firstName ? firstName : user.firstName,
@@ -86,6 +86,7 @@ const UpdateProfileForm = () => {
       };
 
   return (
+    user ?
     <div className="mt-10 lg:mt-0 w-full">
         <div className="mb-6">{/* Input text  */}
             <p className="text-sm font-medium leading-[20px] text-grey-900 mb-2">Username</p>
@@ -131,7 +132,8 @@ const UpdateProfileForm = () => {
             Logout Account
           </button>
         
-    </div>
+    </div> : 
+        <Loader status={true}/>
   )
 }
 
