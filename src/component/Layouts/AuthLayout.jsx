@@ -8,7 +8,7 @@ import GoogleLogins from "../auth/GoogleLogin copy";
 
 const AuthLayout = (props) => {
 
-  const clientId = import.meta.env.VITE_GOOGLE_ID
+  const clientId ='663993483325-oe5t25cc4ugggirhvhtlt1d76nt6jke3.apps.googleusercontent.com'
 
   return (
     <div className="h-[100vh] flex flex-col gap-6 justify-center items-center mx-auto px-4 md:w-[528px] md:px-0 lg:w-[468px]">
