@@ -22,7 +22,8 @@ function App() {
   const [user, setUser] = useState({});
   const [token, setToken] = useState("");
 
-  useEffect(() => {
+  useEffect 
+  (() => {
     setToken(sessionStorage.getItem("token"));
     // setUser(JSON.parse(sessionStorage.getItem('user')))
     setLoading(true);
